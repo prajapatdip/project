@@ -1,0 +1,29 @@
+---
+
+- name: Application setup
+  hosts: all
+  become: true
+
+  tasks:
+   - name: "Install the npm package manager"
+     apt:
+       name: npm
+       state: latest
+
+   - name: "Clone the Application"
+     shell: git clone https://github.com/prajapatdip/project.git
+
+   - name: "Change the diretory"
+     shell: cd project
+
+   - name: "Install dependancies"
+     shell: npm install
+
+   - name: "Install nodemon"
+     shell: npm install -g nodemon
+
+   - name: "Build the app"
+     shell: npm run build
+     
+   - name: "Start the Application"
+     shell: npm run start
